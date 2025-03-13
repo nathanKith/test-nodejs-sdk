@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.13.0",
-    "@yandex-cloud/nodejs-sdk": "^2.8.0",
     "nice-grpc": "^2.1.11"
   }
 }

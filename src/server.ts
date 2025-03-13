@@ -1,7 +1,8 @@
 import {handleUnaryCall, sendUnaryData, Server, ServerCredentials, ServerUnaryCall, UntypedHandleCall, UntypedServiceImplementation} from "@grpc/grpc-js";
 import {Status} from "nice-grpc";
-
-import {cloudApi} from '@yandex-cloud/nodejs-sdk';
+import { CreateNetworkRequest, DeleteNetworkRequest, GetNetworkRequest, ListNetworkOperationsRequest, ListNetworkOperationsResponse, ListNetworkRouteTablesRequest, ListNetworkRouteTablesResponse, ListNetworkSecurityGroupsRequest, ListNetworkSecurityGroupsResponse, ListNetworksRequest, ListNetworksResponse, ListNetworkSubnetsRequest, ListNetworkSubnetsResponse, MoveNetworkRequest, NetworkServiceService, UpdateNetworkRequest } from "./generated/network_service";
+import { Operation } from "./generated/operation";
+import { Network } from "./generated/network";
 
 export interface NetworkServiceServer extends UntypedServiceImplementation {
     /**
@@ -9,46 +10,46 @@ export interface NetworkServiceServer extends UntypedServiceImplementation {
      *
      * Get the list of available Network resources by making a [List] request.
      */
-    get: handleUnaryCall<cloudApi.vpc.network_service.GetNetworkRequest, cloudApi.vpc.network.Network>;
+    get: handleUnaryCall<GetNetworkRequest, Network>;
     /** Retrieves the list of Network resources in the specified folder. */
-    list: handleUnaryCall<cloudApi.vpc.network_service.ListNetworksRequest, cloudApi.vpc.network_service.ListNetworksResponse>;
+    list: handleUnaryCall<ListNetworksRequest, ListNetworksResponse>;
     /**
      * Creates a network in the specified folder using the data specified in the request.
      * Method starts an asynchronous operation that can be cancelled while it is in progress.
      */
-    create: handleUnaryCall<cloudApi.vpc.network_service.CreateNetworkRequest, cloudApi.operation.operation.Operation>;
+    create: handleUnaryCall<CreateNetworkRequest, Operation>;
     /**
      * Updates the specified network.
      * Method starts an asynchronous operation that can be cancelled while it is in progress.
      */
-    update: handleUnaryCall<cloudApi.vpc.network_service.UpdateNetworkRequest, cloudApi.operation.operation.Operation>;
+    update: handleUnaryCall<UpdateNetworkRequest, Operation>;
     /** Deletes the specified network. */
-    delete: handleUnaryCall<cloudApi.vpc.network_service.DeleteNetworkRequest, cloudApi.operation.operation.Operation>;
+    delete: handleUnaryCall<DeleteNetworkRequest, Operation>;
     /** Lists subnets from the specified network. */
-    listSubnets: handleUnaryCall<cloudApi.vpc.network_service.ListNetworkSubnetsRequest, cloudApi.vpc.network_service.ListNetworkSubnetsResponse>;
+    listSubnets: handleUnaryCall<ListNetworkSubnetsRequest, ListNetworkSubnetsResponse>;
     /** Lists security groups from the specified network. */
-    listSecurityGroups: handleUnaryCall<cloudApi.vpc.network_service.ListNetworkSecurityGroupsRequest, cloudApi.vpc.network_service.ListNetworkSecurityGroupsResponse>;
+    listSecurityGroups: handleUnaryCall<ListNetworkSecurityGroupsRequest, ListNetworkSecurityGroupsResponse>;
     /** Lists route tables from the specified network. */
-    listRouteTables: handleUnaryCall<cloudApi.vpc.network_service.ListNetworkRouteTablesRequest, cloudApi.vpc.network_service.ListNetworkRouteTablesResponse>;
+    listRouteTables: handleUnaryCall<ListNetworkRouteTablesRequest, ListNetworkRouteTablesResponse>;
     /** Lists operations for the specified network. */
-    listOperations: handleUnaryCall<cloudApi.vpc.network_service.ListNetworkOperationsRequest, cloudApi.vpc.network_service.ListNetworkOperationsResponse>;
+    listOperations: handleUnaryCall<ListNetworkOperationsRequest, ListNetworkOperationsResponse>;
     /** Move network to another folder. */
-    move: handleUnaryCall<cloudApi.vpc.network_service.MoveNetworkRequest, cloudApi.operation.operation.Operation>;
+    move: handleUnaryCall<MoveNetworkRequest, Operation>;
 }
 
 class NetworkServiceMock implements NetworkServiceServer {
-    list: handleUnaryCall<cloudApi.vpc.network_service.ListNetworksRequest, cloudApi.vpc.network_service.ListNetworksResponse> = () => {};
-    create: handleUnaryCall<cloudApi.vpc.network_service.CreateNetworkRequest, cloudApi.operation.operation.Operation> = () => {};
-    update: handleUnaryCall<cloudApi.vpc.network_service.UpdateNetworkRequest, cloudApi.operation.operation.Operation> = () => {};
-    delete: handleUnaryCall<cloudApi.vpc.network_service.DeleteNetworkRequest, cloudApi.operation.operation.Operation> = () => {};
-    listSubnets: handleUnaryCall<cloudApi.vpc.network_service.ListNetworkSubnetsRequest, cloudApi.vpc.network_service.ListNetworkSubnetsResponse> = () => {};
-    listSecurityGroups: handleUnaryCall<cloudApi.vpc.network_service.ListNetworkSecurityGroupsRequest, cloudApi.vpc.network_service.ListNetworkSecurityGroupsResponse> = () => {};
-    listRouteTables: handleUnaryCall<cloudApi.vpc.network_service.ListNetworkRouteTablesRequest, cloudApi.vpc.network_service.ListNetworkRouteTablesResponse> = () => {};
-    listOperations: handleUnaryCall<cloudApi.vpc.network_service.ListNetworkOperationsRequest, cloudApi.vpc.network_service.ListNetworkOperationsResponse> = () => {};
-    move: handleUnaryCall<cloudApi.vpc.network_service.MoveNetworkRequest, cloudApi.operation.operation.Operation> = () => {};
-    get: handleUnaryCall<cloudApi.vpc.network_service.GetNetworkRequest, cloudApi.vpc.network.Network> = (
-        call: ServerUnaryCall<cloudApi.vpc.network_service.GetNetworkRequest, cloudApi.vpc.network.Network>, 
-        callback: sendUnaryData<cloudApi.vpc.network.Network>
+    list: handleUnaryCall<ListNetworksRequest, ListNetworksResponse> = () => {};
+    create: handleUnaryCall<CreateNetworkRequest, Operation> = () => {};
+    update: handleUnaryCall<UpdateNetworkRequest, Operation> = () => {};
+    delete: handleUnaryCall<DeleteNetworkRequest, Operation> = () => {};
+    listSubnets: handleUnaryCall<ListNetworkSubnetsRequest, ListNetworkSubnetsResponse> = () => {};
+    listSecurityGroups: handleUnaryCall<ListNetworkSecurityGroupsRequest, ListNetworkSecurityGroupsResponse> = () => {};
+    listRouteTables: handleUnaryCall<ListNetworkRouteTablesRequest, ListNetworkRouteTablesResponse> = () => {};
+    listOperations: handleUnaryCall<ListNetworkOperationsRequest, ListNetworkOperationsResponse> = () => {};
+    move: handleUnaryCall<MoveNetworkRequest, Operation> = () => {};
+    get: handleUnaryCall<GetNetworkRequest, Network> = (
+        call: ServerUnaryCall<GetNetworkRequest, Network>, 
+        callback: sendUnaryData<Network>
     ) => {
         const error = {
             name: 'INVALID_ARGUMENT',
@@ -72,7 +73,7 @@ class NetworkServiceMock implements NetworkServiceServer {
     console.log('add service');
     server.addService(
         
-        cloudApi.vpc.network_service.NetworkServiceService,
+        NetworkServiceService,
         networkService,
     );
 
