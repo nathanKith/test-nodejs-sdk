@@ -48,17 +48,17 @@ class NetworkServiceMock implements NetworkServiceServer {
     listOperations: handleUnaryCall<ListNetworkOperationsRequest, ListNetworkOperationsResponse> = () => {};
     move: handleUnaryCall<MoveNetworkRequest, Operation> = () => {};
     get: handleUnaryCall<GetNetworkRequest, Network> = (
-        call: ServerUnaryCall<GetNetworkRequest, Network>, 
+        call: ServerUnaryCall<GetNetworkRequest, Network>,
         callback: sendUnaryData<Network>
     ) => {
+        console.log('request started');
         const error = {
-            name: 'INVALID_ARGUMENT',
-            message: 'INVALID_ARGUMENT (testing retries)',
-            code: Status.INVALID_ARGUMENT,
+            name: 'UNAVAILABLE',
+            message: 'UNAVAILABLE (testing retries)',
+            code: Status.UNAVAILABLE,
         };
         callback(error, null);
 
-        console.log('request finishes');
     };
     [name: string]: UntypedHandleCall;
 
@@ -72,14 +72,14 @@ class NetworkServiceMock implements NetworkServiceServer {
 
     console.log('add service');
     server.addService(
-        
+
         NetworkServiceService,
         networkService,
     );
 
     console.log('bind service');
     server.bindAsync(
-        '127.0.0.1:5051',
+        '127.0.0.1:5052',
         ServerCredentials.createInsecure(),
         (error, port) => {
             if (error) {
