@@ -1,0 +1,23 @@
+{
+  "name": "test-nodejs-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.ts",
+  "scripts": {
+    "server": "cross-env GRPC_TRACE=all GRPC_VERBOSITY=DEBUG ts-node ./src/server.ts",
+    "client": "cross-env  GRPC_TRACE=all GRPC_VERBOSITY=DEBUG ts-node ./src/client.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "cross-env": "^7.0.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.13.0",
+    "@yandex-cloud/nodejs-sdk": "^2.8.0",
+    "nice-grpc": "^2.1.11"
+  }
+}
