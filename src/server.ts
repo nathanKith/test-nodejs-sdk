@@ -53,9 +53,9 @@ class NetworkServiceMock implements NetworkServiceServer {
     ) => {
         console.log('request started');
         const error = {
-            name: 'UNAVAILABLE',
-            message: 'UNAVAILABLE (testing retries)',
-            code: Status.UNAVAILABLE,
+            name: 'INVALID_ARGUMENT',
+            message: 'INVALID_ARGUMENT (testing retries)',
+            code: Status.INVALID_ARGUMENT,
         };
         callback(error, null);
 

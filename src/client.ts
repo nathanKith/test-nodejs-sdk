@@ -1,5 +1,5 @@
 import { credentials } from "@grpc/grpc-js";
-import { GetNetworkRequest, NetworgkServiceClient } from "./generated/network_service";
+import { GetNetworkRequest, NetworkServiceClient } from "./generated/network_service";
 
 const clientNative = NetworkServiceClient;
 const a = new clientNative(
@@ -12,8 +12,8 @@ const a = new clientNative(
                 {
                     name: [{}],
                     retryPolicy: {
-                        maxAttempts: 3,
-                        initialBackoff: '1s',
+                        maxAttempts: 5,
+                        initialBackoff: '0.1s',
                         maxBackoff: '20s',
                         backoffMultiplier: 2,
                         retryableStatusCodes: ["INVALID_ARGUMENT"],
